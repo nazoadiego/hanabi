@@ -14,13 +14,19 @@ import { signOut, useSession } from 'next-auth/react'
 interface SidebarProps {}
 
 const Sidebar: FC<SidebarProps> = () => {
+  const { data: session } = useSession()
   return (
-    <div className="border-r border-b-gray-900 p-5 text-sm text-gray-500 ">
+    <div
+      className="h-screen w-1/2 overflow-y-scroll border-r border-gray-900
+    p-5 text-sm text-gray-500 scrollbar-hide"
+    >
       <div>
         <NavList>
-          <NavItem>
-            <button onClick={() => signOut()}>Log Out</button>
-          </NavItem>
+          {session && (
+            <NavItem>
+              <button onClick={() => signOut()}>Log Out</button>
+            </NavItem>
+          )}
           <NavItem>
             <HomeIcon className="h-5 w-5" />
             <a href="/">Home</a>

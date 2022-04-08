@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Sidebar from '../components/sidebar/Sidebar'
 import { signOut, useSession } from 'next-auth/react'
+import MainBody from '../components/MainBody'
 
 const Home: NextPage = () => {
   const { data: session, status } = useSession()
@@ -13,9 +14,9 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <main className="relative flex">
         <Sidebar />
-        {/* Main Body */}
+        <MainBody />
       </main>
       <div>{/* Player */}</div>
     </div>
