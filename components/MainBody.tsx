@@ -24,7 +24,7 @@ const MainBody: FC<MainBodyProps> = () => {
   const spotifyApi = useSpotify()
   const [color, setColor] = useState('#fff')
   const playlistId = useRecoilValue(playlistIdState)
-  const [playlist, setPlaylist] = useRecoilState(playlistState)
+  const [playlist, setPlaylist] = useRecoilState<any | null>(playlistState)
 
   useEffect(() => {
     setColor(shuffle(colors)[0])
@@ -38,10 +38,6 @@ const MainBody: FC<MainBodyProps> = () => {
       })
       .catch((err) => console.log('Something went wrong', err))
   }, [spotifyApi, playlistId])
-
-  playlist?.tracks.items.map((song) => {
-    console.log(song)
-  })
 
   return (
     <div className="relative h-screen flex-grow overflow-y-scroll text-white scrollbar-hide">
