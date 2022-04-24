@@ -1,4 +1,3 @@
-import { GetServerSideProps } from 'next'
 import { FC } from 'react'
 import { getProviders, signIn } from 'next-auth/react'
 
