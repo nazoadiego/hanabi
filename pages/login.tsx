@@ -2,7 +2,11 @@ import { GetServerSideProps } from 'next'
 import { FC } from 'react'
 import { getProviders, signIn } from 'next-auth/react'
 
-interface LoginPageProps {}
+// TODO Create type for providers (Spotify)
+
+interface LoginPageProps {
+  providers: { name: string; id: string }[]
+}
 
 const LoginPage: FC<LoginPageProps> = ({ providers }) => {
   return (

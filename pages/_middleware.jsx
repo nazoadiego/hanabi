@@ -1,6 +1,5 @@
 import { getToken } from 'next-auth/jwt'
 import { NextResponse } from 'next/server'
-import type { NextMiddleware } from 'next/server'
 
 export async function middleware(req) {
   // Token will exist if user is logged in

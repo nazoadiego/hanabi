@@ -16,10 +16,13 @@ import { playlistIdState } from '../../atoms/playlistAtom'
 
 interface SidebarProps {}
 
+// TODO Avoid using type any in setPlaylist
+// TODO Create type for playlist
+
 const Sidebar: FC<SidebarProps> = () => {
   const spotifyApi = useSpotify()
   const { data: session } = useSession()
-  const [playlists, setPlaylists] = useState([])
+  const [playlists, setPlaylists] = useState<any>([])
   const [playlistId, setPlaylistId] = useRecoilState(playlistIdState)
 
   useEffect(() => {
@@ -72,7 +75,7 @@ const Sidebar: FC<SidebarProps> = () => {
       </div>
       <div>
         <NavList>
-          {playlists.map((playlist) => (
+          {playlists.map((playlist: any) => (
             <NavItem key={playlist.id}>
               <a
                 onClick={() => setPlaylistId(playlist.id)}
