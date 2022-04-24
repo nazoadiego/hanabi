@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import {
   HomeIcon,
   SearchIcon,
@@ -9,24 +9,34 @@ import {
 } from '@heroicons/react/outline'
 import NavList from './NavList'
 import NavItem from './NavItem'
-import { signOut, useSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
+import useSpotify from '../../hooks/useSpotify'
+import { useRecoilState } from 'recoil'
+import { playlistIdState } from '../../atoms/playlistAtom'
 
 interface SidebarProps {}
 
 const Sidebar: FC<SidebarProps> = () => {
+  const spotifyApi = useSpotify()
   const { data: session } = useSession()
+  const [playlists, setPlaylists] = useState([])
+  const [playlistId, setPlaylistId] = useRecoilState(playlistIdState)
+
+  useEffect(() => {
+    if (spotifyApi.getAccessToken()) {
+      spotifyApi.getUserPlaylists().then((data) => {
+        setPlaylists(data.body.items)
+      })
+    }
+  }, [session, spotifyApi])
+
   return (
     <div
-      className="h-screen w-1/2 overflow-y-scroll border-r border-gray-900
-    p-5 text-sm text-gray-500 scrollbar-hide"
+      className="hidden h-screen w-1/6 overflow-y-scroll border-r border-gray-900
+    p-5 pb-36 text-sm text-gray-500 scrollbar-hide lg:block"
     >
       <div>
         <NavList>
-          {session && (
-            <NavItem>
-              <button onClick={() => signOut()}>Log Out</button>
-            </NavItem>
-          )}
           <NavItem>
             <HomeIcon className="h-5 w-5" />
             <a href="/">Home</a>
@@ -62,36 +72,16 @@ const Sidebar: FC<SidebarProps> = () => {
       </div>
       <div>
         <NavList>
-          <NavItem>
-            <span>Playlist name...</span>
-          </NavItem>
-          <NavItem>
-            <span>Playlist name...</span>
-          </NavItem>
-          <NavItem>
-            <span>Playlist name...</span>
-          </NavItem>
-          <NavItem>
-            <span>Playlist name...</span>
-          </NavItem>
-          <NavItem>
-            <span>Playlist name...</span>
-          </NavItem>
-          <NavItem>
-            <span>Playlist name...</span>
-          </NavItem>
-          <NavItem>
-            <span>Playlist name...</span>
-          </NavItem>
-          <NavItem>
-            <span>Playlist name...</span>
-          </NavItem>
-          <NavItem>
-            <span>Playlist name...</span>
-          </NavItem>
-          <NavItem>
-            <span>Playlist name...</span>
-          </NavItem>
+          {playlists.map((playlist) => (
+            <NavItem key={playlist.id}>
+              <a
+                onClick={() => setPlaylistId(playlist.id)}
+                className="cursor-pointer"
+              >
+                {playlist.name}
+              </a>
+            </NavItem>
+          ))}
         </NavList>
       </div>
     </div>
