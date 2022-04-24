@@ -17,6 +17,6 @@ export async function middleware(req) {
   // if they don't have the token AND are requesting
   // a protected route redirect them to login
   if (!token && pathname !== '/login') {
-    return NextResponse.redirect('http://localhost:3000/login')
+    return NextResponse.redirect('https://hanabi-gold.vercel.app/login')
   }
 }
