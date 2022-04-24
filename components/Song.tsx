@@ -4,7 +4,11 @@ import { currentTrackIdState, isPlayingState } from '../atoms/songAtom'
 import useSpotify from '../hooks/useSpotify'
 import { millisToMinutesAndSeconds } from '../lib/time'
 
-interface SongProps {}
+// TODO Create a type for track
+interface SongProps {
+  order: number
+  track: any
+}
 
 const Song: FC<SongProps> = ({ order, track }) => {
   const spotifyApi = useSpotify()

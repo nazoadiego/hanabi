@@ -21,13 +21,15 @@ interface PlayerProps {}
 const Player: FC<PlayerProps> = () => {
   const spotifyApi = useSpotify()
   const { data: session, status } = useSession()
-  const [currentTrackId, setCurrentTrackId] =
-    useRecoilState(currentTrackIdState)
+  // TODO something better than any for the type
+  const [currentTrackId, setCurrentTrackId] = useRecoilState<any | null>(
+    currentTrackIdState
+  )
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState)
   const [volume, setVolume] = useState(50)
 
   // custom hook to get the info from the current song
-  const songInfo = useSongInfo()
+  const songInfo: any = useSongInfo()
 
   // Get the current song if there nothing there
   // it sets our current track id and whether it's playing or not

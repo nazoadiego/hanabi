@@ -24,6 +24,7 @@ const MainBody: FC<MainBodyProps> = () => {
   const spotifyApi = useSpotify()
   const [color, setColor] = useState('#fff')
   const playlistId = useRecoilValue(playlistIdState)
+  // TODO something better than any for the type
   const [playlist, setPlaylist] = useRecoilState<any | null>(playlistState)
 
   useEffect(() => {
@@ -46,12 +47,13 @@ const MainBody: FC<MainBodyProps> = () => {
            space-x-2 rounded-full bg-black p-1 pr-2 opacity-90 hover:opacity-80"
       >
         <img
-          src={session?.user.image}
+          // non-null assertion operator !
+          src={session?.user?.image!}
           alt=""
           className="h-10 w-10 rounded-full"
         />
 
-        <span>{session?.user.name}</span>
+        <span>{session?.user?.name}</span>
         <ChevronDownIcon className="h-5 w-5" />
       </div>
 
