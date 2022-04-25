@@ -13,16 +13,14 @@ import { useSession } from 'next-auth/react'
 import useSpotify from '../../hooks/useSpotify'
 import { useRecoilState } from 'recoil'
 import { playlistIdState } from '../../atoms/playlistAtom'
+import { Playlist } from '../../types/types'
 
 interface SidebarProps {}
-
-// TODO Avoid using type any in setPlaylist
-// TODO Create type for playlist
 
 const Sidebar: FC<SidebarProps> = () => {
   const spotifyApi = useSpotify()
   const { data: session } = useSession()
-  const [playlists, setPlaylists] = useState<any>([])
+  const [playlists, setPlaylists] = useState<Playlist[]>([])
   const [playlistId, setPlaylistId] = useRecoilState(playlistIdState)
 
   useEffect(() => {

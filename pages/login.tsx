@@ -1,8 +1,6 @@
 import { FC } from 'react'
 import { getProviders, signIn } from 'next-auth/react'
 
-// TODO Create type for providers (Spotify)
-
 interface LoginPageProps {
   providers: { name: string; id: string }[]
 }
