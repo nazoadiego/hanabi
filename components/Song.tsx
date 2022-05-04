@@ -40,8 +40,10 @@ const Song: FC<SongProps> = ({ order, track }) => {
           className="h-10 w-10 rounded-sm"
         />
         <div>
-          <h5 className="w-60 truncate text-white lg:w-64">{track.name}</h5>
-          <h5 className="w-40 truncate">{track.artists[0].name}</h5>
+          <h5 className="w-20 truncate text-white md:w-60 lg:w-64">
+            {track.name}
+          </h5>
+          <h5 className="w-20 truncate md:w-40">{track.artists[0].name}</h5>
         </div>
       </div>
 
