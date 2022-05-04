@@ -33,7 +33,7 @@ const Song: FC<SongProps> = ({ order, track }) => {
       onClick={playSong}
     >
       <div className="flex items-center space-x-4">
-        <span>{`${order + 1}`}</span>
+        <div className="flex w-8 justify-center">{`${order + 1}`}</div>
         <img
           src={track.album.images[0].url}
           alt=""
@@ -45,7 +45,7 @@ const Song: FC<SongProps> = ({ order, track }) => {
         </div>
       </div>
 
-      <div className="ml-auto flex items-center space-x-8 md:ml-0">
+      <div className="ml-auto flex items-center justify-between space-x-8 md:ml-0">
         <h5 className="w-40 truncate lg:w-64">{track.album.name}</h5>
         <h5>{millisToMinutesAndSeconds(track.duration_ms)}</h5>
       </div>
